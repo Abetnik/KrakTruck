@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AdminTypeSelector from "../sections/AdminPanel/AdminTypeSelector";
 import AdminFormSale from "../sections/AdminPanel/AdminFormSale";
 import AdminFormPurchase from "../sections/AdminPanel/AdminFormPurchase";
@@ -6,6 +6,12 @@ import AdminItemList from "../sections/AdminPanel/AdminItemList";
 import styles from "./AdminPanel.module.css";
 import { uploadImageToFirebase } from "../utils/uploadImage";
 import { deleteImageFromFirebase } from "../utils/deleteImage";
+import {
+  addItem as addItemToDb,
+  updateItem as updateItemInDb,
+  deleteItem as deleteItemFromDb,
+  fetchItems,
+} from "../utils/firestoreItems";
 
 const AdminPanel = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -35,8 +41,12 @@ const AdminPanel = () => {
   const [mainImagePath, setMainImagePath] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const allItems = JSON.parse(localStorage.getItem("items") || "[]");
-  const filteredItems = allItems.filter((item) => item.type === selectedTab);
+  const [items, setItems] = useState([]);
+  const filteredItems = items.filter((item) => item.type === selectedTab);
+
+  useEffect(() => {
+    fetchItems().then(setItems);
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -70,7 +80,6 @@ const AdminPanel = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const stored = JSON.parse(localStorage.getItem("items") || "[]");
 
     let uploadedMain = null;
     if (mainImageFile) {
@@ -105,26 +114,28 @@ const AdminPanel = () => {
 
     const fullItem = {
       ...newItem,
-      id: newItem.id || Date.now().toString(),
       type: selectedTab,
       mainImage: updatedMainImage,
       mainImagePath: updatedMainPath,
       images: selectedTab === "sale" ? uploadedGallery : [],
     };
 
-    let updatedList;
-    if (newItem.id) {
-      updatedList = stored.map((item) => (item.id === newItem.id ? fullItem : item));
-    } else {
-      updatedList = [...stored, fullItem];
+    try {
+      if (newItem.id) {
+        await updateItemInDb(newItem.id, fullItem);
+      } else {
+        const id = await addItemToDb(fullItem);
+        fullItem.id = id;
+      }
+
+      const refreshed = await fetchItems();
+      setItems(refreshed);
+      alert("Pozycja została zapisana!");
+      resetForm();
+    } catch (err) {
+      console.error(err);
     }
-
-    localStorage.setItem("items", JSON.stringify(updatedList));
-    alert("Pozycja została zapisana!");
-    resetForm();
     setLoading(false);
-
-    window.location.reload();
   };
 
   const handleEdit = (item) => {
@@ -138,7 +149,7 @@ const AdminPanel = () => {
   };
 
   const handleDelete = async (id) => {
-    const itemToDelete = allItems.find((item) => item.id === id);
+    const itemToDelete = items.find((item) => item.id === id);
     if (!itemToDelete) return;
 
     if (itemToDelete.mainImagePath) {
@@ -153,8 +164,9 @@ const AdminPanel = () => {
       }
     }
 
-    const updated = allItems.filter((item) => item.id !== id);
-    localStorage.setItem("items", JSON.stringify(updated));
+    await deleteItemFromDb(id);
+    const refreshed = await fetchItems();
+    setItems(refreshed);
     resetForm();
   };
 

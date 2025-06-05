@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Navbar from "../sections/MainPage/Navbar";
@@ -8,11 +8,18 @@ import ItemHeader from "../sections/ItemPage/ItemHeader";
 import ItemGallery from "../sections/ItemPage/ItemGallery";
 import ItemContactForm from "../sections/ItemPage/ItemContactForm";
 import ItemSuggestions from "../sections/ItemPage/ItemSuggestions";
+import { fetchItems } from "../utils/firestoreItems";
 
 const ItemPage = () => {
   const { id } = useParams();
-  const allItems = JSON.parse(localStorage.getItem("items") || "[]");
-  const currentItem = allItems.find((item) => item.id === id);
+  const [currentItem, setCurrentItem] = useState(null);
+
+  useEffect(() => {
+    fetchItems().then((data) => {
+      const item = data.find((i) => i.id === id);
+      setCurrentItem(item || null);
+    });
+  }, [id]);
 
   if (!currentItem) {
     return (
