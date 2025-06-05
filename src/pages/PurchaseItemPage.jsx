@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Navbar from "../sections/MainPage/Navbar";
@@ -6,12 +6,18 @@ import Footer from "../sections/MainPage/Footer";
 import PurchaseItemHeader from "../sections/PurchaseItemPage/PurchaseItemHeader";
 import ItemContactForm from "../sections/ItemPage/ItemContactForm";
 import PurchaseItemSuggestions from "../sections/PurchaseItemPage/PurchaseItemSuggestions";
+import { fetchItems } from "../utils/firestoreItems";
 
 const PurchaseItemPage = () => {
   const { id } = useParams();
-  const allItems = JSON.parse(localStorage.getItem("items") || "[]");
+  const [currentItem, setCurrentItem] = useState(null);
 
-  const currentItem = allItems.find((item) => item.id === id && item.type === "purchase");
+  useEffect(() => {
+    fetchItems().then((data) => {
+      const item = data.find((i) => i.id === id && i.type === "purchase");
+      setCurrentItem(item || null);
+    });
+  }, [id]);
 
   if (!currentItem) {
     return (
