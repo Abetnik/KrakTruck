@@ -1,0 +1,147 @@
+
+.card {
+    background-color: #f4f4f4;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  .imageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .status {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    font-family: "Inter", sans-serif;
+    text-transform: uppercase;
+  }
+  
+  .sold {
+    background-color: #d9534f;
+    color: white;
+  }
+  
+  .available {
+    background-color: #5cb85c;
+    color: white;
+  }
+  
+  .info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .title {
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 600;
+    color: #1a1a1a;
+    font-family: "Inter", sans-serif;
+  }
+  
+  .year {
+    font-size: 0.9rem;
+    color: #666;
+    font-family: "Inter", sans-serif;
+  }
+  
+  .button {
+    margin-top: auto;
+    display: inline-block;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    background-color: #265a3f;
+    color: white;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #1e4a30;
+  }
+
+  /*Adaprtive*/
+
+        @media (max-width: 768px) {
+          .card {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            border-radius: 0.75rem;
+          }
+    
+          .imageWrapper {
+            aspect-ratio: 4 / 3;
+          }
+    
+          .status {
+            font-size: 0.75rem;
+            padding: 0.4rem 0.75rem;
+          }
+    
+          .info {
+            padding: 0.75rem;
+            gap: 0.5rem;
+          }
+    
+          .title {
+            font-size: 1rem;
+          }
+    
+          .year {
+            font-size: 0.85rem;
+          }
+    
+          .button {
+            font-size: 0.85rem;
+            padding: 0.5rem 0.75rem;
+          }
+        }
+    
+        @media (max-width: 480px) {
+          .card {
+            border-radius: 0.65rem;
+          }
+    
+          .title {
+            font-size: 0.95rem;
+          }
+    
+          .year {
+            font-size: 0.8rem;
+          }
+    
+          .button {
+            font-size: 0.8rem;
+            padding: 0.5rem 0.75rem;
+          }
+        }
+  

@@ -1,0 +1,117 @@
+.section {
+  width: 100%;
+  margin-block-start: var(--section-margin-top, 6.25rem);   /* 100px */
+  margin-block-end: var(--section-margin-bottom, 6.25rem); /* 100px */
+  background-color: white;
+
+  opacity: 0;
+  transform: translateY(3.75rem); /* 60px */
+  transition: all 0.8s ease;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.container {
+  max-width: 80rem; /* 1280px */
+  margin: 0 auto;
+  padding: 0 1.5rem; /* 24px */
+  box-sizing: border-box;
+}
+
+.title {
+  color: #363636;
+  font-size: 4.375rem; /* 70px */
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  margin-bottom: 2.5rem; /* 40px */
+}
+
+.description {
+  color: #363636;
+  font-size: 1.75rem; /* 28px */
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-bottom: 3.75rem; /* 60px */
+  max-width: 62.5rem; /* 1000px */
+}
+
+.logoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr)); /* 120px */
+  gap: 2rem 3.75rem; /* 32px 60px */
+  justify-items: center;
+  align-items: center;
+}
+
+.logo {
+  width: 100%;
+  max-width: 6.25rem; /* 100px */
+  height: auto;
+  opacity: 0;
+  transform: translateY(1.25rem) scale(1); /* 20px */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  will-change: transform;
+}
+
+.logo.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.animate {
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: calc(0.05s * var(--i));
+}
+
+.logo:hover {
+  transform: translateY(0) scale(1.08);
+  cursor: pointer;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(1.875rem); /* 30px */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*Adaptive*/
+
+@media (max-width: 768px) {
+
+  
+  .container {
+    padding: 0 1.5rem;
+    /* такие же отступы как в AboutUs */
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+  }
+
+  .logoGrid {
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 логотипа в строке */
+    gap: 1.5rem 1.5rem;
+  }
+
+  .logo {
+    max-width: 4rem;
+    /* уменьшить размер логотипов */
+  }
+}

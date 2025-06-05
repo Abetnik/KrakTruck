@@ -1,0 +1,10 @@
+[
+  {
+    "origin": [
+      "http://localhost:5173",
+      "https://kraktrucktest.web.app"
+    ],
+    "method": ["GET", "POST", "PUT", "DELETE"],
+    "maxAgeSeconds": 3600
+  }
+]

@@ -1,0 +1,65 @@
+.wrapper {
+    font-family: "Rubik", sans-serif;
+    padding: 4rem 0;
+}
+
+.container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 4vw, 2.5rem);
+    box-sizing: border-box;
+}
+
+.heading {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    background: #fff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.table th,
+.table td {
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f7f7f7;
+    font-weight: 600;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.actions button {
+    background-color: #265a3f;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.actions button:hover {
+    background-color: #1e4a30;
+}
+
+.empty {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #999;
+}

@@ -1,0 +1,122 @@
+.wrapper {
+    margin-bottom: 4rem;
+    font-family: "Inter", sans-serif;
+}
+
+.container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+}
+
+.title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 2rem;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.imageBlock {
+    flex: 1;
+    min-width: 280px;
+    max-width: 500px;
+}
+
+.imageBlock img {
+    width: 100%;
+    border-radius: 1rem;
+    object-fit: cover;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}
+
+.infoBlock {
+    flex: 1;
+    min-width: 280px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.key {
+    font-weight: 600;
+    width: 40%;
+}
+
+.value {
+    color: #444;
+}
+
+.descTitle {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+
+.description {
+    line-height: 1.5;
+    color: #444;
+}
+
+
+@media (max-width: 768px) {
+    .wrapper {
+        margin-bottom: 3rem;
+    }
+
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .imageBlock {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .imageBlock img {
+        border-radius: 0.75rem;
+    }
+
+    .infoBlock {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.95rem;
+    }
+
+    .key {
+        width: 45%;
+    }
+
+    .descTitle {
+        margin-top: 1.5rem;
+        font-size: 1.1rem;
+    }
+
+    .description {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+}
