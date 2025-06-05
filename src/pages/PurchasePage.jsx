@@ -4,6 +4,7 @@ import Footer from "../sections/MainPage/Footer";
 import FilterPurchase from "../sections/PurchasePage/FilterPurchase";
 import PurchaseItemArea from "../sections/PurchasePage/PurchaseItemArea";
 import styles from "./SalePage.module.css"; // можно переименовать позже в shared style
+import { fetchItems } from "../utils/firestoreItems";
 
 const getItemsPerPage = () => {
   if (window.innerWidth <= 768) return 6;
@@ -16,11 +17,11 @@ const PurchasePage = () => {
   const [items, setItems] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
 
-  // Загружаем из localStorage
   useEffect(() => {
-    const storedItems = JSON.parse(localStorage.getItem("items") || "[]");
-    const filtered = storedItems.filter((item) => item.type === "purchase");
-    setItems(filtered);
+    fetchItems().then((data) => {
+      const filtered = data.filter((item) => item.type === "purchase");
+      setItems(filtered);
+    });
 
     const handleResize = () => {
       setItemsPerPage(getItemsPerPage());

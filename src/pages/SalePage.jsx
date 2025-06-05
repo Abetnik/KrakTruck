@@ -4,6 +4,7 @@ import Footer from "../sections/MainPage/Footer";
 import FilterSale from "../sections/SalePage/FilterSale";
 import ItemArea from "../sections/SalePage/ItemArea";
 import styles from "./SalePage.module.css";
+import { fetchItems } from "../utils/firestoreItems";
 
 
 
@@ -30,10 +31,11 @@ useEffect(() => {
 }, []);
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("items") || "[]");
-    const saleItems = stored.filter((item) => item.type === "sale");
-    setItems(saleItems);
-    setFiltered(saleItems);
+    fetchItems().then((data) => {
+      const saleItems = data.filter((item) => item.type === "sale");
+      setItems(saleItems);
+      setFiltered(saleItems);
+    });
   }, []);
 
   useEffect(() => {
