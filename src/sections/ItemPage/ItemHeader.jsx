@@ -1,11 +1,13 @@
 import React from "react";
 import styles from "./ItemHeader.module.css";
+import { useLanguage } from "../../context/LanguageContext";
 
-const ItemHeader = ({ title, mainImage, specs, description }) => {
+const ItemHeader = ({ titlePl, titleEn, title, mainImage, specs, descriptionPl, descriptionEn }) => {
+  const { language } = useLanguage();
   return (
     <section className={styles.wrapper}>
       <div className={styles.container}>
-        <h1 className={styles.title}>{title}</h1>
+        <h1 className={styles.title}>{language === 'pl' ? (titlePl || title) : (titleEn || title)}</h1>
         <div className={styles.content}>
           <div className={styles.imageBlock}>
             <img src={mainImage} alt={title} />
@@ -23,8 +25,10 @@ const ItemHeader = ({ title, mainImage, specs, description }) => {
               </tbody>
             </table>
 
-            <h3 className={styles.descTitle}>Description</h3>
-            <p className={styles.description}>{description}</p>
+            <h3 className={styles.descTitle}>{language === 'pl' ? 'Opis' : 'Description'}</h3>
+            <p className={styles.description}>
+              {language === 'pl' ? (descriptionPl || descriptionEn) : (descriptionEn || descriptionPl)}
+            </p>
           </div>
         </div>
       </div>

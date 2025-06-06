@@ -35,14 +35,18 @@ const ItemPage = () => {
   }
 
   const {
+      titlePl,
+      titleEn,
       title,
       mainImage,
       image,
       specs,
+      descriptionPl,
+      descriptionEn,
       description,
       type,
       category,
-      images, // в будущем — массив фото
+      images,
     } = currentItem;
 
   return (
@@ -51,9 +55,13 @@ const ItemPage = () => {
       <main style={{ maxWidth: "80rem", margin: "0 auto", padding: "6rem 1.5rem 2rem" }}>
 
       <ItemHeader
+          titlePl={titlePl}
+          titleEn={titleEn}
           title={title}
           mainImage={mainImage}
           specs={specs}
+          descriptionPl={descriptionPl}
+          descriptionEn={descriptionEn}
           description={description}
         />
         <ItemGallery images={images && images.length > 0 ? images : [mainImage || image]} />

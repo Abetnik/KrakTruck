@@ -5,6 +5,7 @@ import FilterPurchase from "../sections/PurchasePage/FilterPurchase";
 import PurchaseItemArea from "../sections/PurchasePage/PurchaseItemArea";
 import styles from "./SalePage.module.css"; // можно переименовать позже в shared style
 import { fetchItems } from "../utils/firestoreItems";
+import { useLanguage } from "../context/LanguageContext";
 
 const getItemsPerPage = () => {
   if (window.innerWidth <= 768) return 6;
@@ -12,6 +13,7 @@ const getItemsPerPage = () => {
 };
 
 const PurchasePage = () => {
+  const { language } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [items, setItems] = useState([]);
@@ -53,7 +55,9 @@ const PurchasePage = () => {
 
       <main className={styles.wrapper}>
         <section className={styles.container}>
-          <h1 className={styles.heading}>Zapotrzebowania zakupowe</h1>
+          <h1 className={styles.heading}>
+            {language === "pl" ? "Zapotrzebowania zakupowe" : "Purchase demands"}
+          </h1>
         </section>
 
         <FilterPurchase selected={selectedCategory} onSelect={setSelectedCategory} />

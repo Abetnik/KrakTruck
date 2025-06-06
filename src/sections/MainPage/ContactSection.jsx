@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ContactSection.module.css";
 import background from "../../assets/images/MainPage/ContactBackImage.png";
 import { useInView } from "../../hooks/useInView";
+import { useLanguage } from "../../context/LanguageContext";
 
 import CallIcon from "../../assets/icons/CallIcon.svg";
 import OfficeCallIcon from "../../assets/icons/OffieCallIcon.svg";
@@ -11,7 +12,25 @@ import FacebookIcon from "../../assets/images/MainPage/socialmeia/FacebookIcon.p
 import InstagramIcon from "../../assets/images/MainPage/socialmeia/InstagramIcon.png";
 import MessengerIcon from "../../assets/images/MainPage/socialmeia/MassengerIcon.png";
 
+const texts = {
+  pl: {
+    heading: "Skontaktuj się, aby uzyskać informacje",
+    name: "Imię",
+    email: "Email",
+    msg: "Wiadomość",
+    send: "Wyślij",
+  },
+  en: {
+    heading: "Contact to verify",
+    name: "Name",
+    email: "Email",
+    msg: "Message",
+    send: "Send",
+  },
+};
+
 const ContactSection = () => {
+  const { language } = useLanguage();
   const [ref, isVisible] = useInView(0.25);
 
   return (
@@ -25,7 +44,7 @@ const ContactSection = () => {
         <div className={styles.content}>
           <div className={styles.left}>
             <div>
-              <h2 className={styles.heading}>Contact to verify</h2>
+              <h2 className={styles.heading}>{texts[language].heading}</h2>
               <ul className={styles.infoList}>
                 <li>
                   <img src={CallIcon} alt="Phone" className={styles.icon} />
@@ -76,10 +95,10 @@ const ContactSection = () => {
               console.log("Sending form...");
             }}
           >
-            <input type="text" placeholder="Name" className={styles.input} required />
-            <input type="email" placeholder="Email" className={styles.input} required />
-            <textarea placeholder="Message" className={styles.textarea} required></textarea>
-            <button type="submit" className={styles.button}>Send</button>
+            <input type="text" placeholder={texts[language].name} className={styles.input} required />
+            <input type="email" placeholder={texts[language].email} className={styles.input} required />
+            <textarea placeholder={texts[language].msg} className={styles.textarea} required></textarea>
+            <button type="submit" className={styles.button}>{texts[language].send}</button>
           </form>
         </div>
       </div>
