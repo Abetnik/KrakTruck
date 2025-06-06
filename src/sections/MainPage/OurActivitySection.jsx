@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./OurActivitySection.module.css";
 import { useInView } from "../../hooks/useInView";
+import { useLanguage } from "../../context/LanguageContext";
 
 import Audi from "../../assets/images/MainPage/logos/Audi.png";
 import BMW from "../../assets/images/MainPage/logos/BMW.png";
@@ -32,7 +33,19 @@ const logos = [
   KOMATSU, VolksWagen, SCHMITZ, JCB, VOGELE, MAN
 ];
 
+const texts = {
+  pl: {
+    title: "Nasza działalność",
+    desc: "Zajmujemy się szeroką gamą pojazdów i sprzętu, koncentrując się na następujących markach:",
+  },
+  en: {
+    title: "Our Activity",
+    desc: "We deal with a wide variety of vehicles and equipment, with a focus on the following brands:",
+  },
+};
+
 const OurActivitySection = () => {
+  const { language } = useLanguage();
   const [ref, isVisible] = useInView(0.3);
 
   return (
@@ -45,10 +58,8 @@ const OurActivitySection = () => {
       }}
     >
       <div className={styles.container}>
-        <h2 className={styles.title}>Our Activity</h2>
-        <p className={styles.description}>
-          We deal with a wide variety of vehicles and equipment, with a focus on the following brands:
-        </p>
+        <h2 className={styles.title}>{texts[language].title}</h2>
+        <p className={styles.description}>{texts[language].desc}</p>
         <div className={styles.logoGrid}>
           {logos.map((logo, index) => (
             <img

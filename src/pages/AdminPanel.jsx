@@ -22,12 +22,14 @@ const AdminPanel = () => {
 
   const [newItem, setNewItem] = useState({
     id: null,
-    title: "",
+    titlePl: "",
+    titleEn: "",
     category: "trucks",
     type: "sale",
     year: "",
     status: "available",
-    description: "",
+    descriptionPl: "",
+    descriptionEn: "",
     specs: [],
     images: [],
     mainImage: "",
@@ -173,12 +175,14 @@ const AdminPanel = () => {
   const resetForm = () => {
     setNewItem({
       id: null,
-      title: "",
+      titlePl: "",
+      titleEn: "",
       category: "trucks",
       type: selectedTab,
       year: "",
       status: selectedTab === "sale" ? "available" : "poszukiwane",
-      description: "",
+      descriptionPl: "",
+      descriptionEn: "",
       specs: [],
       images: [],
       mainImage: "",

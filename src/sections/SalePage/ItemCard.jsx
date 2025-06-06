@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./ItemCard.module.css";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 const ItemCard = ({ item }) => {
-  const { id, title, year, status, mainImage } = item;
+  const { language } = useLanguage();
+  const { id, titlePl, titleEn, title, year, status, mainImage } = item;
 
   return (
     <div className={styles.card}>
@@ -18,10 +20,10 @@ const ItemCard = ({ item }) => {
         </span>
       </div>
       <div className={styles.info}>
-        <h3 className={styles.title}>{title}</h3>
+        <h3 className={styles.title}>{language === 'pl' ? (titlePl || title) : (titleEn || title)}</h3>
         <p className={styles.year}>{year}</p>
         <Link to={`/sale/${id}`} className={styles.button}>
-          View Details
+          {language === 'pl' ? 'Szczegóły' : 'View Details'}
         </Link>
       </div>
     </div>

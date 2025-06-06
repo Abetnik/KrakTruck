@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./ItemContactForm.module.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 import CallIcon from "../../assets/icons/CallIcon.svg";
 import OfficeCallIcon from "../../assets/icons/OffieCallIcon.svg";
@@ -8,7 +9,13 @@ import FacebookIcon from "../../assets/images/MainPage/socialmeia/FacebookIcon.p
 import InstagramIcon from "../../assets/images/MainPage/socialmeia/InstagramIcon.png";
 import MessengerIcon from "../../assets/images/MainPage/socialmeia/MassengerIcon.png";
 
+const texts = {
+  pl: { heading: "Kontakt w sprawie oferty", name: "Imię", email: "Email", msg: "Wiadomość", send: "Wyślij", success: "Wiadomość wysłana!" },
+  en: { heading: "Contact to verify", name: "Your Name", email: "Your Email", msg: "Your Message", send: "Send", success: "Message sent successfully!" },
+};
+
 const ItemContactForm = () => {
+  const { language } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -34,7 +41,7 @@ const ItemContactForm = () => {
         <div className={styles.content}>
           {/* Левая колонка — контакты */}
           <div className={styles.left}>
-            <h2 className={styles.heading}>Contact to verify</h2>
+            <h2 className={styles.heading}>{texts[language].heading}</h2>
 
             <ul className={styles.infoList}>
               <li>
@@ -69,7 +76,7 @@ const ItemContactForm = () => {
             <input
               type="text"
               name="name"
-              placeholder="Your Name"
+              placeholder={texts[language].name}
               value={formData.name}
               onChange={handleChange}
               required
@@ -78,7 +85,7 @@ const ItemContactForm = () => {
             <input
               type="email"
               name="email"
-              placeholder="Your Email"
+              placeholder={texts[language].email}
               value={formData.email}
               onChange={handleChange}
               required
@@ -86,15 +93,15 @@ const ItemContactForm = () => {
             />
             <textarea
               name="message"
-              placeholder="Your Message"
+              placeholder={texts[language].msg}
               rows="5"
               value={formData.message}
               onChange={handleChange}
               required
               className={styles.textarea}
             />
-            <button type="submit" className={styles.button}>Send</button>
-            {sent && <p className={styles.success}>Message sent successfully!</p>}
+            <button type="submit" className={styles.button}>{texts[language].send}</button>
+            {sent && <p className={styles.success}>{texts[language].success}</p>}
           </form>
         </div>
       </div>

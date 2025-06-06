@@ -5,10 +5,12 @@ import FilterSale from "../sections/SalePage/FilterSale";
 import ItemArea from "../sections/SalePage/ItemArea";
 import styles from "./SalePage.module.css";
 import { fetchItems } from "../utils/firestoreItems";
+import { useLanguage } from "../context/LanguageContext";
 
 
 
 const SalePage = () => {
+  const { language } = useLanguage();
   const [items, setItems] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [activeCategory, setActiveCategory] = useState("all");
@@ -66,7 +68,9 @@ useEffect(() => {
 
       <main className={styles.wrapper}>
         <section className={styles.container}>
-          <h1 className={styles.heading}>Nasze ogłoszenia</h1>
+          <h1 className={styles.heading}>
+            {language === "pl" ? "Nasze ogłoszenia" : "Our offers"}
+          </h1>
         </section>
 
         <FilterSale active={activeCategory} setActive={setActiveCategory} />

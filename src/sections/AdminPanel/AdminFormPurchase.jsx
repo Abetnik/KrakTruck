@@ -55,11 +55,17 @@ const AdminFormPurchase = ({
       </h3>
 
       <input
-        name="title"
-        placeholder="Tytuł"
-        value={newItem.title}
+        name="titlePl"
+        placeholder="Tytuł (PL)"
+        value={newItem.titlePl}
         onChange={onChange}
         required
+      />
+      <input
+        name="titleEn"
+        placeholder="Title (EN)"
+        value={newItem.titleEn}
+        onChange={onChange}
       />
       <input
         name="year"
@@ -79,9 +85,15 @@ const AdminFormPurchase = ({
       )}
 
       <textarea
-        name="description"
-        placeholder="Opis"
-        value={newItem.description}
+        name="descriptionPl"
+        placeholder="Opis (PL)"
+        value={newItem.descriptionPl}
+        onChange={onChange}
+      />
+      <textarea
+        name="descriptionEn"
+        placeholder="Description (EN)"
+        value={newItem.descriptionEn}
         onChange={onChange}
       />
 

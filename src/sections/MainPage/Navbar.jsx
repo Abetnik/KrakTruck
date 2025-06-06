@@ -5,17 +5,41 @@ import { useInView } from "../../hooks/useInView";
 import { scrollToSection } from "../../hooks/scrollToSection";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useLanguage } from "../../context/LanguageContext";
+
+const texts = {
+  pl: {
+    about: "O nas",
+    service: "Usługi",
+    purchase: "Zakup",
+    sale: "Sprzedaż",
+    contact: "Kontakt",
+    code: "PL",
+    en: "Angielski",
+    pl: "Polski",
+  },
+  en: {
+    about: "About us",
+    service: "Service",
+    purchase: "Purchase",
+    sale: "Sale",
+    contact: "Contact",
+    code: "EN",
+    en: "English",
+    pl: "Polski",
+  },
+};
 
 const Navbar = ({ refs }) => {
   const [ref, isVisible] = useInView(0.1);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
-  const [language, setLanguage] = useState("EN");
+  const { language, changeLanguage } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const toggleLangMenu = () => setLangMenuOpen(!langMenuOpen);
-  const changeLang = (lang) => {
-    setLanguage(lang);
+  const selectLang = (lang) => {
+    changeLanguage(lang);
     setLangMenuOpen(false);
   };
 
@@ -50,12 +74,12 @@ const Navbar = ({ refs }) => {
           <div className={styles.mobileControls}>
             <div className={styles.langWrapper}>
               <button onClick={toggleLangMenu} className={styles.langButton}>
-                {language}
+                {texts[language].code}
               </button>
               {langMenuOpen && (
                 <div className={styles.langDropdown}>
-                  <span onClick={() => changeLang("EN")}>English</span>
-                  <span onClick={() => changeLang("PL")}>Polski</span>
+                  <span onClick={() => selectLang("en")}>{texts.en.en}</span>
+                  <span onClick={() => selectLang("pl")}>{texts.pl.pl}</span>
                 </div>
               )}
             </div>
@@ -66,23 +90,23 @@ const Navbar = ({ refs }) => {
           </div>
         ) : (
           <ul className={styles.navLinks}>
-            <li className={styles.linkItem} onClick={() => handleScroll("about")}>About us</li>
-            <li className={styles.linkItem} onClick={() => handleScroll("service")}>Service</li>
+            <li className={styles.linkItem} onClick={() => handleScroll("about")}>{texts[language].about}</li>
+            <li className={styles.linkItem} onClick={() => handleScroll("service")}>{texts[language].service}</li>
             <li className={styles.linkItem}>
-              <Link to="/purchase" className={styles.navLink}>Purchase</Link>
+              <Link to="/purchase" className={styles.navLink}>{texts[language].purchase}</Link>
             </li>
             <li className={styles.linkItem}>
-              <Link to="/sale" className={styles.navLink}>Sale</Link>
+              <Link to="/sale" className={styles.navLink}>{texts[language].sale}</Link>
             </li>
             <li>
-              <button className={styles.contactButton} onClick={() => handleScroll("contact")}>Contact</button>
+              <button className={styles.contactButton} onClick={() => handleScroll("contact")}>{texts[language].contact}</button>
             </li>
             <li className={styles.langWrapper}>
-              <button onClick={toggleLangMenu} className={styles.langButton}>{language}</button>
+              <button onClick={toggleLangMenu} className={styles.langButton}>{texts[language].code}</button>
               {langMenuOpen && (
                 <div className={styles.langDropdown}>
-                  <span onClick={() => changeLang("EN")}>English</span>
-                  <span onClick={() => changeLang("PL")}>Polski</span>
+                  <span onClick={() => selectLang("en")}>{texts.en.en}</span>
+                  <span onClick={() => selectLang("pl")}>{texts.pl.pl}</span>
                 </div>
               )}
             </li>
@@ -92,13 +116,13 @@ const Navbar = ({ refs }) => {
         {isMobile && (
           <div className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}>
             <ul className={styles.mobileMenuList}>
-              <li onClick={() => handleScroll("about")}>About us</li>
-              <li onClick={() => handleScroll("service")}>Service</li>
-              <li><Link to="/purchase" onClick={() => setMenuOpen(false)}>Purchase</Link></li>
-              <li><Link to="/sale" onClick={() => setMenuOpen(false)}>Sale</Link></li>
+              <li onClick={() => handleScroll("about")}>{texts[language].about}</li>
+              <li onClick={() => handleScroll("service")}>{texts[language].service}</li>
+              <li><Link to="/purchase" onClick={() => setMenuOpen(false)}>{texts[language].purchase}</Link></li>
+              <li><Link to="/sale" onClick={() => setMenuOpen(false)}>{texts[language].sale}</Link></li>
               <li>
                 <button onClick={() => handleScroll("contact")} className={styles.contactButton}>
-                  Contact
+                  {texts[language].contact}
                 </button>
               </li>
             </ul>

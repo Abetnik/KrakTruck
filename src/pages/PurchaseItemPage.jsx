@@ -32,17 +32,20 @@ const PurchaseItemPage = () => {
     );
   }
 
-  const { title, mainImage, specs, description, type, category } = currentItem;
+  const { titlePl, titleEn, title, mainImage, specs, descriptionPl, descriptionEn, type, category } = currentItem;
 
   return (
     <>
       <Navbar />
       <main style={{ maxWidth: "80rem", margin: "0 auto", padding: "6rem 1.5rem 2rem" }}>
         <PurchaseItemHeader
+          titlePl={titlePl}
+          titleEn={titleEn}
           title={title}
           mainImage={mainImage}
           specs={specs}
-          description={description}
+          descriptionPl={descriptionPl}
+          descriptionEn={descriptionEn}
         />
 
         <ItemContactForm />

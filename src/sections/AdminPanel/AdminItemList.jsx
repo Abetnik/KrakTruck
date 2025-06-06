@@ -21,7 +21,7 @@ const AdminItemList = ({ items, onEdit, onDelete }) => {
             <tbody>
               {items.map((item) => (
                 <tr key={item.id}>
-                  <td>{item.title}</td>
+                  <td>{item.titlePl || item.titleEn || item.title}</td>
                   <td>{item.category}</td>
                   <td>{item.year}</td>
                   <td>{item.status.toUpperCase()}</td>
